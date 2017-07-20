@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ndbx formatVersion="21" type="file" uuid="99911db1-2b4d-47a2-b108-a14b5c8a2f3f">
+    <property name="canvasHeight" value="720"/>
+    <property name="canvasWidth" value="1280"/>
+    <property name="canvasX" value="0"/>
+    <property name="canvasY" value="0"/>
+    <node name="root" prototype="core.network" renderedChild="combine1">
+        <node name="colorize3" position="-2.00,6.00" prototype="corevector.colorize">
+            <port name="fill" type="color" value="#ffb600ff"/>
+        </node>
+        <node name="combine1" position="5.00,9.00" prototype="list.combine"/>
+        <node name="copy1" position="-2.00,7.00" prototype="corevector.copy">
+            <port name="copies" type="int" value="2"/>
+            <port name="rotate" type="float" value="45.0"/>
+        </node>
+        <node name="ellipse1" position="-2.00,1.00" prototype="corevector.ellipse">
+            <port name="width" type="float" value="16.0"/>
+            <port name="height" type="float" value="16.0"/>
+        </node>
+        <node name="frame1" position="5.00,0.00" prototype="core.frame"/>
+        <node name="grid2" position="1.00,1.00" prototype="corevector.grid">
+            <port name="columns" type="int" value="44"/>
+            <port name="rows" type="int" value="44"/>
+            <port name="width" type="float" value="1470.0"/>
+            <port name="height" type="float" value="1470.0"/>
+        </node>
+        <node name="hsb_color1" position="5.00,4.00" prototype="color.hsb_color">
+            <port name="saturation" type="float" value="255.0"/>
+            <port name="brightness" type="float" value="255.0"/>
+        </node>
+        <node name="multiply1" position="5.00,3.00" prototype="math.multiply">
+            <port name="value2" type="float" value="1.67"/>
+        </node>
+        <node name="random_numbers1" position="11.00,3.00" prototype="math.random_numbers">
+            <port name="amount" type="int" value="1"/>
+            <port name="start" type="float" value="2.0"/>
+            <port name="end" type="float" value="8.0"/>
+        </node>
+        <node name="textpath1" position="8.00,3.00" prototype="corevector.textpath">
+            <port name="text" type="string" value="@shui #music // @birdy1976 #graphics"/>
+            <port name="font_name" type="string" value="Ubuntu"/>
+            <port name="font_size" type="float" value="69.0"/>
+        </node>
+        <node name="translate1" position="-2.00,3.00" prototype="corevector.translate"/>
+        <node name="wiggle1" position="9.00,5.00" prototype="corevector.wiggle">
+            <port name="offset" type="point" value="8.00,8.00"/>
+        </node>
+        <conn input="multiply1.value1" output="frame1"/>
+        <conn input="hsb_color1.hue" output="multiply1"/>
+        <conn input="translate1.shape" output="ellipse1"/>
+        <conn input="translate1.translate" output="grid2"/>
+        <conn input="colorize3.shape" output="translate1"/>
+        <conn input="copy1.shape" output="colorize3"/>
+        <conn input="combine1.list1" output="copy1"/>
+        <conn input="colorize3.fill" output="hsb_color1"/>
+        <conn input="copy1.rotate" output="frame1"/>
+        <conn input="wiggle1.shape" output="textpath1"/>
+        <conn input="combine1.list2" output="wiggle1"/>
+        <conn input="random_numbers1.seed" output="frame1"/>
+        <conn input="wiggle1.offset" output="random_numbers1"/>
+        <conn input="wiggle1.seed" output="random_numbers1"/>
+    </node>
+</ndbx>

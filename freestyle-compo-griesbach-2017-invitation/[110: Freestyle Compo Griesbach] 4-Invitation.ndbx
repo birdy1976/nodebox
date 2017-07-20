@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ndbx formatVersion="21" type="file" uuid="99911db1-2b4d-47a2-b108-a14b5c8a2f3f">
+    <property name="canvasHeight" value="720"/>
+    <property name="canvasWidth" value="1280"/>
+    <property name="canvasX" value="0"/>
+    <property name="canvasY" value="0"/>
+    <node name="root" prototype="core.network" renderedChild="combine1">
+        <node name="add1" position="1.00,5.00" prototype="math.add"/>
+        <node name="add2" position="0.00,0.00" prototype="math.add">
+            <port name="value2" type="float" value="200.0"/>
+        </node>
+        <node name="colorize1" position="6.00,6.00" prototype="corevector.colorize"/>
+        <node name="combine1" position="5.00,9.00" prototype="list.combine"/>
+        <node name="count1" position="1.00,3.00" prototype="list.count"/>
+        <node name="ellipse2" position="-4.00,1.00" prototype="corevector.ellipse">
+            <port name="width" type="float" value="400.0"/>
+            <port name="height" type="float" value="400.0"/>
+        </node>
+        <node name="frame1" position="5.00,-1.00" prototype="core.frame"/>
+        <node name="hsb_color1" position="8.00,4.00" prototype="color.hsb_color">
+            <port name="saturation" type="float" value="255.0"/>
+            <port name="brightness" type="float" value="255.0"/>
+        </node>
+        <node name="multiply1" position="8.00,3.00" prototype="math.multiply">
+            <port name="value2" type="float" value="1.67"/>
+        </node>
+        <node name="multiply2" position="0.00,1.00" prototype="math.multiply">
+            <port name="value2" type="float" value="1.23"/>
+        </node>
+        <node name="point1" position="-4.00,5.00" prototype="corevector.point"/>
+        <node name="quad_curve1" position="-4.00,7.00" prototype="corevector.quad_curve">
+            <port name="t" type="float" value="70.0"/>
+            <port name="distance" type="float" value="-100.0"/>
+        </node>
+        <node name="random_numbers1" position="11.00,3.00" prototype="math.random_numbers">
+            <port name="amount" type="int" value="1"/>
+            <port name="start" type="float" value="-2.0"/>
+            <port name="end" type="float" value="2.0"/>
+        </node>
+        <node name="random_numbers2" position="5.00,2.00" prototype="math.random_numbers">
+            <port name="start" type="float" value="123.0"/>
+            <port name="end" type="float" value="130.0"/>
+        </node>
+        <node name="range1" position="1.00,4.00" prototype="math.range"/>
+        <node name="resample1" position="-4.00,3.00" prototype="corevector.resample">
+            <port name="length" type="float" value="20.0"/>
+        </node>
+        <node name="shift1" position="-3.00,6.00" prototype="list.shift"/>
+        <node name="skew1" position="8.00,7.00" prototype="corevector.skew">
+            <port name="skew" type="point" value="24.00,0.00"/>
+        </node>
+        <node name="textpath1" position="5.00,4.00" prototype="corevector.textpath">
+            <port name="text" type="string" value="design your demo"/>
+            <port name="font_name" type="string" value="Ubuntu"/>
+            <port name="font_size" type="float" value="76.0"/>
+        </node>
+        <node name="wave1" position="1.00,6.00" prototype="math.wave"/>
+        <conn input="multiply1.value1" output="frame1"/>
+        <conn input="hsb_color1.hue" output="multiply1"/>
+        <conn input="random_numbers1.seed" output="frame1"/>
+        <conn input="combine1.list2" output="skew1"/>
+        <conn input="skew1.skew" output="random_numbers1"/>
+        <conn input="random_numbers2.seed" output="frame1"/>
+        <conn input="textpath1.font_size" output="random_numbers2"/>
+        <conn input="resample1.shape" output="ellipse2"/>
+        <conn input="point1.value" output="resample1"/>
+        <conn input="quad_curve1.point1" output="point1"/>
+        <conn input="shift1.list" output="point1"/>
+        <conn input="quad_curve1.point2" output="shift1"/>
+        <conn input="quad_curve1.t" output="wave1"/>
+        <conn input="count1.list" output="point1"/>
+        <conn input="range1.end" output="count1"/>
+        <conn input="add1.value1" output="range1"/>
+        <conn input="wave1.offset" output="add1"/>
+        <conn input="add1.value2" output="frame1"/>
+        <conn input="combine1.list1" output="quad_curve1"/>
+        <conn input="colorize1.shape" output="textpath1"/>
+        <conn input="skew1.shape" output="colorize1"/>
+        <conn input="colorize1.fill" output="hsb_color1"/>
+        <conn input="add2.value1" output="frame1"/>
+        <conn input="multiply2.value1" output="add2"/>
+        <conn input="resample1.length" output="multiply2"/>
+    </node>
+</ndbx>

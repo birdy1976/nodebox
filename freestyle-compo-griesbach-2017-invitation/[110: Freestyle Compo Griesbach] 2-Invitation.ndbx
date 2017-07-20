@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ndbx formatVersion="21" type="file" uuid="9255c218-7eea-41fa-a645-9c637f8475bb">
+    <property name="canvasHeight" value="720"/>
+    <property name="canvasWidth" value="1280"/>
+    <property name="canvasX" value="0"/>
+    <property name="canvasY" value="0"/>
+    <node name="root" prototype="core.network" renderedChild="combine1">
+        <node name="colorize1" position="9.00,3.00" prototype="corevector.colorize">
+            <port name="fill" type="color" value="#0000ffff"/>
+        </node>
+        <node name="combine1" position="12.00,7.00" prototype="list.combine"/>
+        <node name="divide1" position="21.00,-1.00" prototype="math.divide">
+            <port name="value1" type="float" value="500.0"/>
+        </node>
+        <node name="ellipse1" position="9.00,0.00" prototype="corevector.ellipse">
+            <port name="width" type="float" value="40.0"/>
+            <port name="height" type="float" value="40.0"/>
+        </node>
+        <node name="frame1" position="17.00,-4.00" prototype="core.frame"/>
+        <node name="grid1" position="13.00,3.00" prototype="corevector.grid">
+            <port name="columns" type="int" value="31"/>
+            <port name="rows" type="int" value="17"/>
+            <port name="width" type="float" value="1240.0"/>
+            <port name="height" type="float" value="680.0"/>
+        </node>
+        <node name="hsb_color1" position="13.00,1.00" prototype="color.hsb_color">
+            <port name="saturation" type="float" value="255.0"/>
+            <port name="brightness" type="float" value="255.0"/>
+            <port name="alpha" type="float" value="128.0"/>
+        </node>
+        <node name="multiply2" position="13.00,-1.00" prototype="math.multiply">
+            <port name="value2" type="float" value="3.0"/>
+        </node>
+        <node name="resample1" position="17.00,1.00" prototype="corevector.resample">
+            <port name="length" type="float" value="1.0"/>
+            <port name="points" type="int" value="36"/>
+        </node>
+        <node name="sample1" position="9.00,-1.00" prototype="math.sample">
+            <port name="amount" type="int" value="4"/>
+            <port name="start" type="float" value="30.0"/>
+            <port name="end" type="float" value="60.0"/>
+        </node>
+        <node name="sample2" position="13.00,0.00" prototype="math.sample">
+            <port name="amount" type="int" value="4"/>
+            <port name="end" type="float" value="255.0"/>
+        </node>
+        <node name="snap1" position="17.00,2.00" prototype="corevector.snap"/>
+        <node name="textpath1" position="17.00,-1.00" prototype="corevector.textpath">
+            <port name="text" type="string" value="pleasure for creativity"/>
+            <port name="font_name" type="string" value="Ubuntu"/>
+            <port name="font_size" type="float" value="111.0"/>
+        </node>
+        <node name="translate1" position="9.00,5.00" prototype="corevector.translate"/>
+        <conn input="resample1.shape" output="textpath1"/>
+        <conn input="snap1.shape" output="resample1"/>
+        <conn input="divide1.value2" output="frame1"/>
+        <conn input="resample1.length" output="divide1"/>
+        <conn input="colorize1.shape" output="ellipse1"/>
+        <conn input="translate1.shape" output="colorize1"/>
+        <conn input="colorize1.fill" output="hsb_color1"/>
+        <conn input="translate1.translate" output="grid1"/>
+        <conn input="ellipse1.width" output="sample1"/>
+        <conn input="ellipse1.height" output="sample1"/>
+        <conn input="hsb_color1.hue" output="sample2"/>
+        <conn input="combine1.list1" output="translate1"/>
+        <conn input="combine1.list2" output="snap1"/>
+        <conn input="multiply2.value1" output="frame1"/>
+        <conn input="sample2.amount" output="multiply2"/>
+    </node>
+</ndbx>

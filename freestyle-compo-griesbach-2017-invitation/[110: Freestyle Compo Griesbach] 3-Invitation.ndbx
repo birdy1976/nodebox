@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ndbx formatVersion="21" type="file" uuid="99911db1-2b4d-47a2-b108-a14b5c8a2f3f">
+    <property name="canvasHeight" value="720"/>
+    <property name="canvasWidth" value="1280"/>
+    <property name="canvasX" value="0"/>
+    <property name="canvasY" value="0"/>
+    <node name="root" prototype="core.network" renderedChild="combine1">
+        <node name="colorize1" position="1.00,7.00" prototype="corevector.colorize">
+            <port name="fill" type="color" value="#0c00ffff"/>
+        </node>
+        <node name="colorize2" position="10.00,7.00" prototype="corevector.colorize"/>
+        <node name="combine1" position="7.00,9.00" prototype="list.combine"/>
+        <node name="ellipse2" position="10.00,5.00" prototype="corevector.ellipse">
+            <port name="width" type="float" value="20.0"/>
+            <port name="height" type="float" value="30.0"/>
+        </node>
+        <node name="frame1" position="4.00,0.00" prototype="core.frame"/>
+        <node name="gray_color1" position="4.00,5.00" prototype="color.gray_color">
+            <port name="alpha" type="float" value="33.0"/>
+            <port name="range" type="float" value="66.0"/>
+        </node>
+        <node name="grid1" position="1.00,3.00" prototype="corevector.grid">
+            <port name="columns" type="int" value="36"/>
+            <port name="rows" type="int" value="18"/>
+            <port name="width" type="float" value="1280.0"/>
+            <port name="height" type="float" value="720.0"/>
+        </node>
+        <node name="hsb_color1" position="7.00,5.00" prototype="color.hsb_color">
+            <port name="saturation" type="float" value="255.0"/>
+            <port name="brightness" type="float" value="255.0"/>
+        </node>
+        <node name="multiply1" position="7.00,3.00" prototype="math.multiply">
+            <port name="value2" type="float" value="1.67"/>
+        </node>
+        <node name="random_numbers1" position="4.00,3.00" prototype="math.random_numbers">
+            <port name="amount" type="int" value="1"/>
+            <port name="start" type="float" value="5.0"/>
+            <port name="end" type="float" value="20.0"/>
+        </node>
+        <node name="random_numbers2" position="13.00,3.00" prototype="math.random_numbers">
+            <port name="amount" type="int" value="11"/>
+            <port name="start" type="float" value="2.0"/>
+            <port name="end" type="float" value="9.0"/>
+            <port name="seed" type="int" value="7"/>
+        </node>
+        <node name="rect1" position="1.00,4.00" prototype="corevector.rect">
+            <port name="width" type="float" value="30.0"/>
+            <port name="height" type="float" value="30.0"/>
+        </node>
+        <node name="sample1" position="4.00,4.00" prototype="math.sample">
+            <port name="amount" type="int" value="5"/>
+            <port name="end" type="float" value="255.0"/>
+        </node>
+        <node name="scatter1" position="10.00,3.00" prototype="corevector.scatter">
+            <port name="amount" type="int" value="1234"/>
+        </node>
+        <node name="textpath1" position="10.00,2.00" prototype="corevector.textpath">
+            <port name="text" type="string" value="performance is the limit"/>
+            <port name="font_size" type="float" value="102.0"/>
+        </node>
+        <conn input="sample1.amount" output="random_numbers1"/>
+        <conn input="rect1.position" output="grid1"/>
+        <conn input="colorize1.shape" output="rect1"/>
+        <conn input="gray_color1.gray" output="sample1"/>
+        <conn input="colorize1.fill" output="gray_color1"/>
+        <conn input="random_numbers1.seed" output="frame1"/>
+        <conn input="colorize2.fill" output="hsb_color1"/>
+        <conn input="ellipse2.position" output="scatter1"/>
+        <conn input="ellipse2.width" output="random_numbers2"/>
+        <conn input="ellipse2.height" output="random_numbers2"/>
+        <conn input="scatter1.shape" output="textpath1"/>
+        <conn input="colorize2.shape" output="ellipse2"/>
+        <conn input="combine1.list2" output="colorize2"/>
+        <conn input="combine1.list1" output="colorize1"/>
+        <conn input="random_numbers2.seed" output="frame1"/>
+        <conn input="multiply1.value1" output="frame1"/>
+        <conn input="hsb_color1.hue" output="multiply1"/>
+    </node>
+</ndbx>
